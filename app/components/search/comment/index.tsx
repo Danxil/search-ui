@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export type Comment = {
   articleLink: string;
@@ -12,7 +12,7 @@ export default ({ text, articleLink, articleTitle }: Comment) => {
       {text}
       <br />[
       <small>
-        <a target="_blank" href={articleLink}>
+        <a target="_blank" href={articleLink} rel="noreferrer">
           {articleTitle}
         </a>
       </small>

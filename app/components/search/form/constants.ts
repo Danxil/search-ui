@@ -1,10 +1,10 @@
 export const SOURCES = [
   {
-    id: "blind",
-    text: "Blind",
+    id: 'blind',
+    text: 'Blind',
   },
   {
-    id: "dou",
-    text: "DOU",
+    id: 'dou',
+    text: 'DOU',
   },
 ] as const;

@@ -1,7 +1,7 @@
-import Form from "./form";
-import Results from "./results";
+import Form from './form';
+import Results from './results';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export default ({
   initSearchStr,

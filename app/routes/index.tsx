@@ -1,12 +1,12 @@
-import type { LoaderArgs } from "@remix-run/node";
-import { useLoaderData, useSearchParams } from "@remix-run/react";
+import type { LoaderArgs } from '@remix-run/node';
+import { useLoaderData, useSearchParams } from '@remix-run/react';
 
-import Search from "~/components/search";
-import { SOURCES } from "~/components/search/form/constants";
+import Search from '~/components/search';
+import { SOURCES } from '~/components/search/form/constants';
 
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
-  const q = url.searchParams.get("q");
+  const q = url.searchParams.get('q');
 
   if (!q) return [];
 
@@ -27,9 +27,9 @@ export default function IndexRoute() {
   const data = useLoaderData<typeof loader>();
   let [searchParams] = useSearchParams();
 
-  const searchStr = searchParams.get("q") || "";
+  const searchStr = searchParams.get('q') || '';
   const initSource =
-    (searchParams.get("source") as typeof SOURCES[number]["id"]) ||
+    (searchParams.get('source') as typeof SOURCES[number]['id']) ||
     SOURCES[0].id;
 
   return (

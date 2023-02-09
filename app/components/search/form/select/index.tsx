@@ -1,14 +1,15 @@
-import ClickAwayListener from "@mui/base/ClickAwayListener";
-import OptionUnstyled from "@mui/base/OptionUnstyled";
-import PopperUnstyled from "@mui/base/PopperUnstyled";
-import SelectUnstyled, {
+import ClickAwayListener from '@mui/base/ClickAwayListener';
+import OptionUnstyled from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import type {
   SelectUnstyledProps,
   SelectUnstyledRootSlotProps,
-} from "@mui/base/SelectUnstyled";
-import UnfoldMoreRoundedIcon from "@mui/icons-material/UnfoldMoreRounded";
-import React, { useRef, useState } from "react";
+} from '@mui/base/SelectUnstyled';
+import SelectUnstyled from '@mui/base/SelectUnstyled';
+import UnfoldMoreRoundedIcon from '@mui/icons-material/UnfoldMoreRounded';
+import React, { useRef, useState } from 'react';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const Button = React.forwardRef(function Button<TValue extends {}>(
   props: SelectUnstyledRootSlotProps<TValue> & {

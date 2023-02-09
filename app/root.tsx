@@ -1,17 +1,17 @@
-import { LiveReload, Outlet, Links, Scripts } from "@remix-run/react";
-import type { LinksFunction, LoaderArgs } from "@remix-run/node";
-import { cssBundleHref } from "@remix-run/css-bundle";
-import React from "react";
+import { LiveReload, Outlet, Links, Scripts } from '@remix-run/react';
+import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import { cssBundleHref } from '@remix-run/css-bundle';
+import React from 'react';
 
-import "the-new-css-reset/css/reset.css";
-import "normalize.css/normalize.css";
+import 'the-new-css-reset/css/reset.css';
+import 'normalize.css/normalize.css';
 
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
-import "~/components/global.module.css";
+import '~/components/global.module.css';
 
 export function Document({ children }: { children: React.ReactNode }) {
   return (
@@ -45,7 +45,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
 export const links: LinksFunction = () => {
   return [
-    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+    ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
   ];
 };
 

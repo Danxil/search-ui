@@ -1,4 +1,5 @@
-import Comment, { Comment as CommentType } from "../comment";
+import type { Comment as CommentType } from '../comment';
+import Comment from '../comment';
 
 export default ({ comments }: { comments: CommentType[] }) => {
   return (

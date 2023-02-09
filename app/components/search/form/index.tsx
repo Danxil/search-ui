@@ -1,18 +1,18 @@
-import Button from "@mui/base/ButtonUnstyled";
-import OptionUnstyled from "@mui/base/OptionUnstyled";
+import Button from '@mui/base/ButtonUnstyled';
+import OptionUnstyled from '@mui/base/OptionUnstyled';
 
-import { Form } from "@remix-run/react";
-import { SOURCES } from "./constants";
-import Select, { Option } from "./select";
+import { Form } from '@remix-run/react';
+import { SOURCES } from './constants';
+import Select, { Option } from './select';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export default ({
   initSearchStr,
   initSource,
 }: {
   initSearchStr: string;
-  initSource: typeof SOURCES[number]["id"];
+  initSource: typeof SOURCES[number]['id'];
 }) => {
   return (
     <Form method="get" action="/">
