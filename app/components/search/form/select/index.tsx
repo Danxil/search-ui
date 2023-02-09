@@ -18,7 +18,7 @@ const Button = React.forwardRef(function Button<TValue extends {}>(
   },
   ref: React.ForwardedRef<HTMLButtonElement>
 ) {
-  const { ownerState, closeListbox, ...other } = props;
+  const { ownerState, closeListbox, btnClassName, ...other } = props;
 
   const onClick = useRef((e: React.MouseEvent<HTMLElement>) => {
     closeListbox();
@@ -31,7 +31,7 @@ const Button = React.forwardRef(function Button<TValue extends {}>(
       {...other}
       ref={ref}
       onClick={onClick}
-      className={`${styles.btn} ${props.btnClassName}`}
+      className={`${styles.btn} ${btnClassName}`}
     >
       {other.children}
       <UnfoldMoreRoundedIcon />

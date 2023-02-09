@@ -1,0 +1,15 @@
+.container {
+  margin-top: 80px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.list {
+  margin-top: 50px;
+  max-width: var(--maxWidth);
+}

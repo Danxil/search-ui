@@ -3,7 +3,7 @@ import Results from './results';
 
 import styles from './styles.module.css';
 
-export default ({
+const Search = ({
   initSearchStr,
   initSource,
   comments,
@@ -15,3 +15,5 @@ export default ({
     </div>
   );
 };
+
+export default Search;

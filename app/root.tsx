@@ -4,7 +4,6 @@ import { cssBundleHref } from '@remix-run/css-bundle';
 import React from 'react';
 
 import 'the-new-css-reset/css/reset.css';
-import 'normalize.css/normalize.css';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
