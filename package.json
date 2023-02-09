@@ -10,6 +10,13 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/base": "^5.0.0-alpha.117",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.8",
+    "@remix-run/css-bundle": "^1.12.0",
     "@remix-run/express": "^1.12.0",
     "@remix-run/node": "^1.12.0",
     "@remix-run/react": "^1.12.0",
@@ -18,8 +25,10 @@
     "express": "^4.18.2",
     "isbot": "^3.6.5",
     "morgan": "^1.10.0",
+    "normalize.css": "^8.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "the-new-css-reset": "^1.8.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.12.0",

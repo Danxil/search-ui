@@ -1,12 +1,8 @@
-import type { LinksFunction, LoaderArgs } from "@remix-run/node";
-import { useLoaderData, Form, useSearchParams } from "@remix-run/react";
-import stylesUrl from "~/styles/index.css";
+import type { LoaderArgs } from "@remix-run/node";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
 
-type Row = {
-  articleLink: string;
-  articleTitle: string;
-  text: string;
-};
+import Search from "~/components/search";
+import { SOURCES } from "~/components/search/form/constants";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
@@ -27,59 +23,16 @@ export const loader = async ({ request }: LoaderArgs) => {
   return result;
 };
 
-export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: stylesUrl }];
-};
-
-const SOURCES: { id: string; text: string }[] = [
-  {
-    id: "blind",
-    text: "Blind",
-  },
-  {
-    id: "dou",
-    text: "DOU",
-  },
-];
-
 export default function IndexRoute() {
   const data = useLoaderData<typeof loader>();
   let [searchParams] = useSearchParams();
 
+  const searchStr = searchParams.get("q") || "";
+  const initSource =
+    (searchParams.get("source") as typeof SOURCES[number]["id"]) ||
+    SOURCES[0].id;
+
   return (
-    <div>
-      <Form method="get" action="/">
-        <label>
-          Search:
-          <select name="source">
-            {SOURCES.map(({ id, text }) => (
-              <option value={id} key={id}>
-                {text}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            name="q"
-            defaultValue={searchParams.get("q") || ""}
-          />
-        </label>
-        <button type="submit">Send</button>
-      </Form>
-      <ul>
-        {data.map(({ text, articleLink, articleTitle }: Row) => (
-          <li className="row" key={`${text}${articleLink}`}>
-            {text}
-            <br />[
-            <small>
-              <a target="_blank" href={articleLink}>
-                {articleTitle}
-              </a>
-            </small>
-            ]
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Search initSearchStr={searchStr} initSource={initSource} comments={data} />
   );
 }
