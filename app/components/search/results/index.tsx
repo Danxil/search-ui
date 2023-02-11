@@ -3,7 +3,7 @@ import Comment from '../comment';
 
 import styles from './styles.module.css';
 
-const Results = ({ comments }: { comments: CommentType[] }) => {
+const Results = ({ comments }: { comments: CommentType[]; loadMoreActive: boolean }) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Found comments</h3>

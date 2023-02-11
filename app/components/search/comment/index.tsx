@@ -4,12 +4,15 @@ export type Comment = {
   articleLink: string;
   articleTitle: string;
   text: string;
+  publicationDate: string;
 };
 
-export default ({ text, articleLink, articleTitle }: Comment) => {
+const CommentComp = ({ text, articleLink, articleTitle, publicationDate }: Comment) => {
   return (
     <li className={styles.row} key={`${text}${articleLink}`}>
       {text}
+      <br/>
+      {publicationDate}
       <br />[
       <small>
         <a target="_blank" href={articleLink} rel="noreferrer">
@@ -20,3 +23,5 @@ export default ({ text, articleLink, articleTitle }: Comment) => {
     </li>
   );
 };
+
+export default CommentComp;

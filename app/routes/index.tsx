@@ -3,14 +3,20 @@ import { useLoaderData, useSearchParams } from '@remix-run/react';
 
 import Search from '~/components/search';
 import { SOURCES } from '~/components/search/form/constants';
+import type { Comment as CommentType } from '../components/search/comment';
 
-export const loader = async ({ request }: LoaderArgs) => {
+type Response = {
+  result: CommentType[],
+  loadMoreActive: boolean,
+}
+
+export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
   const url = new URL(request.url);
   const q = url.searchParams.get('q');
+  const from = url.searchParams.get('from');
+  const sort = url.searchParams.get('sort');
 
-  if (!q) return [];
-
-  const resp = await fetch(`http://localhost:3333/search?q=${q}`);
+  const resp = await fetch(`http://localhost:3333/search?q=${q || ''}&from=${from || ''}&sort=${sort || ''}`);
 
   if (!resp.ok) {
     const errorText = await resp.text();
@@ -33,6 +39,6 @@ export default function IndexRoute() {
     SOURCES[0].id;
 
   return (
-    <Search initSearchStr={searchStr} initSource={initSource} comments={data} />
+    <Search initSearchStr={searchStr} initSource={initSource} comments={data.result} loadMoreActive={data.loadMoreActive} />
   );
 }
