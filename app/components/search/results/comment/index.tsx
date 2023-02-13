@@ -10,16 +10,18 @@ export type Comment = {
 const CommentComp = ({ text, articleLink, articleTitle, publicationDate }: Comment) => {
   return (
     <li className={styles.row} key={`${text}${articleLink}`}>
-      {text}
-      <br/>
-      {publicationDate}
-      <br />[
-      <small>
-        <a target="_blank" href={articleLink} rel="noreferrer">
-          {articleTitle}
-        </a>
-      </small>
+      <div className={styles.container}>
+        {text}
+        <br/>
+        {publicationDate}
+        <br />[
+        <small>
+          <a target="_blank" href={articleLink} rel="noreferrer">
+            {articleTitle}
+          </a>
+        </small>
       ]
+      </div>
     </li>
   );
 };

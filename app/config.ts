@@ -1,0 +1,1 @@
+export const SEARCH_URL = process.env.SEARCH_URL || 'http://localhost:3333';

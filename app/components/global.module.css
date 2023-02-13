@@ -5,7 +5,8 @@
 
 body {
   font-family: Roboto;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  color: var(--mainColor);
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */

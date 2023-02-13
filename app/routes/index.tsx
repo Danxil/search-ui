@@ -1,9 +1,11 @@
 import type { LoaderArgs } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 
+import type { Comment as CommentType } from '../components/search/results/comment';
+
 import Search from '~/components/search';
 import { SOURCES } from '~/components/search/form/constants';
-import type { Comment as CommentType } from '../components/search/comment';
+import { SEARCH_URL } from '~/config'
 
 type Response = {
   result: CommentType[],
@@ -16,7 +18,7 @@ export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
   const from = url.searchParams.get('from');
   const sort = url.searchParams.get('sort');
 
-  const resp = await fetch(`http://localhost:3333/search?q=${q || ''}&from=${from || ''}&sort=${sort || ''}`);
+  const resp = await fetch(`${SEARCH_URL}/search?q=${q || ''}&from=${from || ''}&sort=${sort || ''}`);
 
   if (!resp.ok) {
     const errorText = await resp.text();

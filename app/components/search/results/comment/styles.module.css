@@ -1,0 +1,29 @@
+.row {
+  padding: 80px 0;
+  position: relative;
+  align-items: center;
+}
+
+.container {
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+}
+
+.row + .row::before {
+  border-top: 2px solid var(--mainColor);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.row + .row::after {
+  border-top: 5px dashed white;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100px;
+  margin-left: -50px;
+}

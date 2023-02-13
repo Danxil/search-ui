@@ -17,8 +17,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 0 0 10px 10px;
   padding: 50px 0;
+  color: white;
 }
 
 .title {
@@ -38,8 +38,6 @@
 }
 
 .form {
-  display: flex;
-  align-items: center;
   margin-top: 50px;
 }
 
@@ -55,22 +53,19 @@
 }
 
 .sourceControl {
-  border-radius: 10px 0 0 10px;
   font-weight: bold;
 }
 
 .searchControl {
-  border-radius: 0 10px 10px 0;
   border-left: 0;
   width: 600px;
 }
 
 .submitBtn {
   composes: interactiveItemShadow;
-  background-color: #ff7a00;
+  background-color: #ff6800;
   padding: 0 30px;
   line-height: 20px;
-  border-radius: 10px;
   margin-left: 20px;
   color: white;
   cursor: pointer;

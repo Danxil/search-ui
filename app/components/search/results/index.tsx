@@ -1,6 +1,5 @@
-import type { Comment as CommentType } from '../comment';
-import Comment from '../comment';
-
+import type { Comment as CommentType } from './comment';
+import Comment from './comment';
 import styles from './styles.module.css';
 
 const Results = ({ comments }: { comments: CommentType[]; loadMoreActive: boolean }) => {
