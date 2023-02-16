@@ -1,0 +1,4 @@
+:global(.MuiDialogContent-root > div > div:first-child),
+:global([role="tooltip"] .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded > div > div:first-child) {
+    display: none;
+}

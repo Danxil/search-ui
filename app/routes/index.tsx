@@ -1,10 +1,10 @@
 import type { LoaderArgs } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 
-import type { Comment as CommentType } from '../components/search/results/comment';
+import type { Comment as CommentType } from '../modules/search/results/comment';
 
-import Search from '~/components/search';
-import { SOURCES } from '~/components/search/form/constants';
+import Search from '~/modules/search';
+import { SOURCES } from '~/modules/search/form/constants';
 import { SEARCH_URL } from '~/config'
 
 type Response = {

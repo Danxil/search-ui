@@ -41,6 +41,11 @@
     box-shadow: 0 0 1px 8px rgba(0, 0, 0, 0.25);
   } */
 
+.root .thumb .upIcon,
+.root .thumb .downIcon {
+    font-size: 20px;
+}
+
 .root.checked .thumb {
     transform: translateX(14px);
 }

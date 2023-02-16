@@ -6,6 +6,7 @@ module.exports = {
     'indent': [1, 2],
     'import/order': [1, {
       'newlines-between': 'always',
-    }]
+    }],
+    'max-len': [1, 120]
   }
 };

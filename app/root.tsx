@@ -2,6 +2,8 @@ import { LiveReload, Outlet, Links, Scripts } from '@remix-run/react';
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { cssBundleHref } from '@remix-run/css-bundle';
 import React from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 import 'the-new-css-reset/css/reset.css';
 
@@ -10,7 +12,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import '~/components/global.module.css';
+import '~/modules/global.module.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 export function Document({ children }: { children: React.ReactNode }) {
   return (
@@ -51,7 +60,11 @@ export const links: LinksFunction = () => {
 export default function App() {
   return (
     <Document>
-      <Outlet />
+      <ThemeProvider theme={darkTheme}>
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+          <Outlet />
+        </LocalizationProvider>
+      </ThemeProvider>
     </Document>
   );
 }

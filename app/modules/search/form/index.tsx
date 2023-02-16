@@ -1,4 +1,5 @@
 import Button from '@mui/base/ButtonUnstyled';
+import { AppBar } from '@mui/material';
 import { Form as RefmixForm } from '@remix-run/react';
 import { useRef } from 'react';
 
@@ -27,7 +28,7 @@ const Form = ({
       <h1 className={styles.title}>Find insight</h1>
       <h2 className={styles.subTitle}>Search by comments</h2>
       <RefmixForm className={styles.form} method="get" action="/" ref={ref}>
-        <div>
+        <div className={styles.inputs}>
           <Select
             name="source"
             btnClassName={`${styles.formItem} ${styles.sourceControl}`}

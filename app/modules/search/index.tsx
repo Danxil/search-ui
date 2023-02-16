@@ -1,6 +1,5 @@
 import Form from './form';
 import Results from './results';
-
 import styles from './styles.module.css';
 
 const Search = ({
