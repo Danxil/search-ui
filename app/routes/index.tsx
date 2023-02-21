@@ -1,10 +1,8 @@
 import type { LoaderArgs } from '@remix-run/node';
-import { useLoaderData, useSearchParams } from '@remix-run/react';
 
 import type { Comment as CommentType } from '../modules/search/results/comment';
 
 import Search from '~/modules/search';
-import { SOURCES } from '~/modules/search/form/constants';
 import { SEARCH_URL } from '~/config'
 
 type Response = {
@@ -14,11 +12,13 @@ type Response = {
 
 export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
   const url = new URL(request.url);
-  const q = url.searchParams.get('q');
-  const from = url.searchParams.get('from');
-  const sort = url.searchParams.get('sort');
+  const q = url.searchParams.get('q') || '';
+  const from = url.searchParams.get('from') || '';
+  const sort = url.searchParams.get('sort') || '';
+  const publicationDateFrom = url.searchParams.get('publicationDateFrom') || '';
+  const publicationDateTo = url.searchParams.get('publicationDateTo') || '';
 
-  const resp = await fetch(`${SEARCH_URL}/search?q=${q || ''}&from=${from || ''}&sort=${sort || ''}`);
+  const resp = await fetch(`${SEARCH_URL}/search?q=${q}&from=${from}&sort=${sort}&publicationDateFrom=${publicationDateFrom}&publicationDateTo=${publicationDateTo}`);
 
   if (!resp.ok) {
     const errorText = await resp.text();
@@ -32,15 +32,5 @@ export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
 };
 
 export default function IndexRoute() {
-  const data = useLoaderData<typeof loader>();
-  let [searchParams] = useSearchParams();
-
-  const searchStr = searchParams.get('q') || '';
-  const initSource =
-    (searchParams.get('source') as typeof SOURCES[number]['id']) ||
-    SOURCES[0].id;
-
-  return (
-    <Search initSearchStr={searchStr} initSource={initSource} comments={data.result} loadMoreActive={data.loadMoreActive} />
-  );
+  return <Search />;
 }

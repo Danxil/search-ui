@@ -1,21 +1,32 @@
-import type { DateRange} from '@mui/x-date-pickers-pro/DateRangePicker';
-import type { Moment } from 'moment';
-import { useState } from 'react';
+import type { ComponentProps} from 'react';
+import { useRef } from 'react';
 
 import DateRangeFilter from './dateRangeFilter';
 import styles from './styles.module.css';
 import Switch from './switch';
 
-const Settings = ({ onChange }: { onChange: () => void }) => {
+const SORT_SWITCH_VALUE = 'asc';
+
+const Settings = ({
+  onChange,
+  initSort,
+  initFilter
+}: {
+  onChange: () => void;
+  initSort: string;
+  initFilter: ComponentProps<typeof DateRangeFilter>['initValue']
+}) => {
+  const defaultChecked = useRef(initSort === 'asc').current;
+
   return <div className={styles.settings}>
     <label className={styles.sortBlock}>
       Sort by publication date
-      <Switch name='sort' value='asc' onChange={onChange} />
+      <Switch name='sort' value={SORT_SWITCH_VALUE} defaultChecked={defaultChecked} onChange={onChange} />
     </label>
     <label className={styles.filterBlock}>
       Filter by publication date
       <div className={styles.dateRangeFilter}>
-        <DateRangeFilter onChange={onChange} />
+        <DateRangeFilter onChange={onChange} initValue={initFilter} />
       </div>
     </label>
   </div>

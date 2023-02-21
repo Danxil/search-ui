@@ -1,10 +1,11 @@
 .container {
   margin-top: 80px;
   width: 100%;
+  color: var(--mainColor);
 }
 
 .title {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   text-transform: capitalize;
   text-align: center;

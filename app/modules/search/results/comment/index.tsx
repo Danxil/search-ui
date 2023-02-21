@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import styles from './styles.module.css';
 
 export type Comment = {
@@ -9,20 +11,28 @@ export type Comment = {
 
 const CommentComp = ({ text, articleLink, articleTitle, publicationDate }: Comment) => {
   return (
-    <li className={styles.row} key={`${text}${articleLink}`}>
+    <div className={styles.row} key={`${text}${articleLink}`}>
       <div className={styles.container}>
-        {text}
-        <br/>
-        {publicationDate}
-        <br />[
-        <small>
-          <a target="_blank" href={articleLink} rel="noreferrer">
-            {articleTitle}
-          </a>
-        </small>
-      ]
+        <div className={styles.meta}>
+          <div>
+            [
+            <small>
+              <a target="_blank" href={articleLink} rel="noreferrer">
+                {articleTitle}
+              </a>
+            </small>
+            ]
+          </div>
+          <div className={styles.date}>
+            {moment(publicationDate).format('MM/DD/YYYY HH:mm')}
+          </div>
+        </div>
+        <div className={styles.comment}>
+          {text}
+        </div>
+       
       </div>
-    </li>
+    </div>
   );
 };
 

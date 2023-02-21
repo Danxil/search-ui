@@ -1,6 +1,5 @@
 .row {
   padding: 80px 0;
-  position: relative;
   align-items: center;
 }
 
@@ -9,7 +8,11 @@
   margin: 0 auto;
 }
 
-.row + .row::before {
+[data-virtuilized-row] {
+  position: relative;
+}
+
+[data-virtuilized-row] + [data-virtuilized-row]::before {
   border-top: 2px solid var(--mainColor);
   content: '';
   position: absolute;
@@ -18,7 +21,7 @@
   width: 100%;
 }
 
-.row + .row::after {
+[data-virtuilized-row] + [data-virtuilized-row]::after {
   border-top: 5px dashed white;
   content: '';
   position: absolute;
@@ -26,4 +29,17 @@
   left: 50%;
   width: 100px;
   margin-left: -50px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+
+}
+
+.comment {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 27px;
 }

@@ -18,7 +18,12 @@ const SwitchTrack = (
 
 const SwitchThumb = (
   props: React.HTMLProps<HTMLInputElement>,
-) => (<span {...props}><ArrowDownwardIcon className={styles.downIcon} /><ArrowUpward className={styles.upIcon} /></span> );
+) => (
+  <span {...props}>
+    <ArrowDownwardIcon className={styles.downIcon} />
+    <ArrowUpward className={styles.upIcon} />
+  </span>
+);
 
 const SwitchInput = React.forwardRef(function SwitchRoot(
   props: React.HTMLProps<HTMLInputElement>,
@@ -26,9 +31,9 @@ const SwitchInput = React.forwardRef(function SwitchRoot(
 ) { return  <input {...props} ref={ref} /> });
 
 const Switch = (
-  { name, value, ...props }: UseSwitchParameters & HTMLProps<HTMLInputElement>,
+  { name, value, defaultChecked, ...props }: UseSwitchParameters & HTMLProps<HTMLInputElement>,
 ) => {
-  const { getInputProps, checked, disabled, focusVisible } = useSwitch({ ...props });
+  const { getInputProps, checked, disabled, focusVisible } = useSwitch({ ...props, defaultChecked });
 
   const stateClasses = {
     [styles.checked]: checked,
@@ -41,7 +46,13 @@ const Switch = (
       <SwitchTrack className={`${styles.track}`}>
         <SwitchThumb className={`${styles.thumb} ${clsx(stateClasses)}`} />
       </SwitchTrack>
-      <SwitchInput className={`${styles.input}`} {...getInputProps()} name={name} value={value} />
+      <SwitchInput
+        className={`${styles.input}`}
+        {...getInputProps()}
+        defaultChecked={defaultChecked}
+        name={name}
+        value={value}
+      />
     </SwitchRoot>
   )
 };

@@ -1,33 +1,30 @@
 import Button from '@mui/base/ButtonUnstyled';
-import { AppBar } from '@mui/material';
+import type { FormProps } from '@remix-run/react';
 import { Form as RefmixForm } from '@remix-run/react';
-import { useRef } from 'react';
+import type { ForwardedRef, ReactNode } from 'react';
+import { forwardRef} from 'react';
 
 import { SOURCES } from './constants';
 import Select, { Option } from './select';
-import Settings from './settings';
 import styles from './styles.module.css';
 
-const Form = ({
+const Form = forwardRef(function Form({
   initSearchStr,
   initSource,
+  children,
+  onSubmit
 }: {
   initSearchStr: string;
   initSource: typeof SOURCES[number]['id'];
-}) => {
-  const ref = useRef<HTMLFormElement>(null);
-
-  const onSettingsChange = useRef(() => {
-    if (!ref.current) return;
-
-    ref.current.dispatchEvent(new Event('submit', { bubbles: true }));
-  }).current
+  children: ReactNode
+  onSubmit: FormProps['onSubmit']
+}, ref: ForwardedRef<HTMLFormElement>) {
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Find insight</h1>
       <h2 className={styles.subTitle}>Search by comments</h2>
-      <RefmixForm className={styles.form} method="get" action="/" ref={ref}>
+      <RefmixForm className={styles.form} method="get" action="/" ref={ref} onSubmit={onSubmit}>
         <div className={styles.inputs}>
           <Select
             name="source"
@@ -49,10 +46,10 @@ const Form = ({
           />
           <Button className={styles.submitBtn} type="submit">Search</Button>
         </div>
-        <Settings onChange={onSettingsChange} />
+        {children}
       </RefmixForm>
     </div>
   );
-};
+});
 
 export default Form;
