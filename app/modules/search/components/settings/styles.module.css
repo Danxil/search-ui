@@ -1,0 +1,45 @@
+.settings {
+    margin-top: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+@media (max-width: 1000px) {
+    .settings {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+}
+
+.sortBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .sortBlock {
+       margin-top: 30px;
+    }
+}
+
+.filterBlock {
+    text-align: right;
+    padding-top: 8px;
+}
+
+.dateRangeFilter {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+@media (max-width: 1000px) {
+    .settingsControl {
+        font-size: 12px;
+    }
+}

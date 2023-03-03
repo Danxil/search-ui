@@ -8,7 +8,8 @@
     "dev:remix": "remix watch",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "typecheck": "tsc",
-    "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./ --fix"
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./ --fix",
+    "test": "npm run typecheck & npm run eslint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -28,6 +29,7 @@
     "cross-env": "^7.0.3",
     "express": "^4.18.2",
     "isbot": "^3.6.5",
+    "lodash.debounce": "^4.0.8",
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "normalize.css": "^8.0.1",
@@ -39,6 +41,7 @@
   "devDependencies": {
     "@remix-run/dev": "^1.12.0",
     "@remix-run/eslint-config": "^1.12.0",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "dotenv": "^16.0.3",

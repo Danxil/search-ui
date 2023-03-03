@@ -7,6 +7,7 @@ module.exports = {
     'import/order': [1, {
       'newlines-between': 'always',
     }],
-    'max-len': [1, 120]
+    'max-len': [1, 120],
+    'react-hooks/exhaustive-deps': 0
   }
 };

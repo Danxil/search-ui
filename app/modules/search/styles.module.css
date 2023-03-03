@@ -2,4 +2,46 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  color: white;
+}
+
+.formItem {
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.24);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.24);
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.24);
+  height: 70px;
+  color: black;
+  background: white;
+  padding: 0 15px;
+  border: 1px solid var(--mainColor);
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+@media (max-width: 1000px) {
+  .formItem {
+    height: 50px;
+  }
+}
+
+.sourceControl {
+  font-weight: bold;
+  width: 150px;
+}
+
+.searchControl {
+  border-left: 0;
+  width: 600px;
+}
+
+@media (max-width: 1000px) {
+  .searchControl {
+    width: 100%;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }

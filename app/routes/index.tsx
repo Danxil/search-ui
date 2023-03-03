@@ -1,24 +1,31 @@
-import type { LoaderArgs } from '@remix-run/node';
+import type { LoaderArgs, MetaFunction } from '@remix-run/node';
 
-import type { Comment as CommentType } from '../modules/search/results/comment';
+import type { CommentType } from '../modules/search/components/comment';
 
 import Search from '~/modules/search';
 import { SEARCH_URL } from '~/config'
 
-type Response = {
+export type Response = {
   result: CommentType[],
   loadMoreActive: boolean,
+  perPage?: number,
+  total?: number,
 }
+
+export const meta: MetaFunction = () => ({
+  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0',
+  title: 'Comments search',
+});
 
 export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
   const url = new URL(request.url);
   const q = url.searchParams.get('q') || '';
-  const from = url.searchParams.get('from') || '';
+  const page = url.searchParams.get('page') || '';
   const sort = url.searchParams.get('sort') || '';
   const publicationDateFrom = url.searchParams.get('publicationDateFrom') || '';
   const publicationDateTo = url.searchParams.get('publicationDateTo') || '';
 
-  const resp = await fetch(`${SEARCH_URL}/search?q=${q}&from=${from}&sort=${sort}&publicationDateFrom=${publicationDateFrom}&publicationDateTo=${publicationDateTo}`);
+  const resp = await fetch(`${SEARCH_URL}/search?q=${q}&page=${page}&sort=${sort}&publicationDateFrom=${publicationDateFrom}&publicationDateTo=${publicationDateTo}`);
 
   if (!resp.ok) {
     const errorText = await resp.text();

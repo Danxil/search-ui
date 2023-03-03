@@ -1,0 +1,22 @@
+[data-row] {
+    position: relative;
+}
+
+[data-row] + [data-row]::before {
+    border-top: 2px solid var(--mainColor);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+[data-row] + [data-row]::after {
+    border-top: 5px dashed #334752;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+}

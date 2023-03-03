@@ -1,0 +1,33 @@
+.options {
+  list-style: none;
+  cursor: pointer;
+}
+
+.btn {
+  min-width: 100px;
+  position: relative;
+}
+
+.btn:hover {
+}
+
+.btn > svg {
+  font-size: 1rem;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 10px;
+}
+
+.input {
+  height: 100% !important;
+  padding-right: 0 !important;
+  display: flex !important;
+  align-items: center;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 1000px) {
+  .option {
+  }
+}

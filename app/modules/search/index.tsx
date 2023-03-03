@@ -1,54 +1,108 @@
-import { useLoaderData } from '@remix-run/react';
-import moment from 'moment';
-import { useEffect, useRef } from 'react';
-import { Snackbar } from '@mui/material';
+import { useCallback, useMemo, useRef } from 'react';
 
-import Results from './results';
-import styles from './styles.module.css';
-import Settings from './form/settings';
-import Form from './form';
+import Results from './components/results';
+import Settings from './components/settings';
+import Form from './components/form';
 import useInitValues from './hooks/useInitValues';
-import useCriteriaUpdateAlret from './cirteriaUpdateAlert';
+import useModel from './hooks/useModel';
+import type { ScrollViewReturnType } from './hooks/useServerSync';
+import useServerSync from './hooks/useServerSync';
+import PaginationView from './components/paginationView';
+import ScrollView from './components/scrollView';
+import CirteriaUpdateAlert from './components/cirteriaUpdateAlert';
+import styles from './styles.module.css';
+// Import from resultRow does't work
+import './components/resultRow/styles.module.css'
+import useModelControls from './hooks/useModelControls';
 
-import type { loader } from '~/routes';
+import { useSearchParams } from '@remix-run/react';
+
+import useQuerySyncToModel from './hooks/useQuerySyncToModel';
+import useFormChangeFlow from './hooks/useLoadFlows';
+
+const renderLoading = () => <div className={styles.loading}>Wait...</div>;
+const renderEmpty = () => <div className={styles.loading}>No results. Change criteria</div>;
 
 const Search = () => {
+  let [searchParams] = useSearchParams();
+
+  const paginationView = useRef(searchParams.get('page') !== null).current;
+
+  const { data, load, loadWithoutNavigation } = useServerSync(
+    paginationView,
+  ) as ScrollViewReturnType;
+
+  const initModel = useInitValues();
+
+  const { model, ...setters } = useModel(initModel);
+
   const {
-    initSearchStr,
-    initSort,
-    initFilter,
-    initSource,
-  } = useInitValues();
+    setPageAndLoad,
+    dateRangeAndLoad,
+    setSortAndLoad,
+    loadMoreData
+  } = useFormChangeFlow(setters, model, load, loadWithoutNavigation);
 
-  const data = useLoaderData<typeof loader>();
+  useQuerySyncToModel({ query: initModel, current: model, ...setters, load: loadWithoutNavigation  });
 
-  const { renderAlert } = useCriteriaUpdateAlret(data.result);
+  const {
+    renderSortSwitch,
+    renderDateRange,
+    renderSourceSelect,
+    renderQueryInput,
+    renderPagination,
+  } = useModelControls({
+    model,
+    ...setters,
+    setPage: setPageAndLoad,
+    setDateRange: dateRangeAndLoad,
+    setSort: setSortAndLoad,
+  });
 
-  const formRef = useRef<HTMLFormElement>(null);
+  const loadData = useCallback(() => setPageAndLoad(0), [setPageAndLoad])
 
-  const onSettingsChange = useRef(() => {
-    if (!formRef.current) return;
+  const renderPaginationWithPageData = useCallback(() =>
+    renderPagination(data.perPage || 0, data.total || 0), [
+    data.perPage, data.total, renderPagination
+  ]);
 
-    formRef.current.dispatchEvent(new Event('submit', { bubbles: true }));
-  }).current;
+  const renderResult = useCallback(() => {
+    if (!data.result) return;
+    return <Results>
+      {
+        paginationView ? (
+          <PaginationView
+            comments={data.result}
+            renderPagination={renderPaginationWithPageData}
+          />
+        ) : <ScrollView comments={data.result} loadMore={loadMoreData} />
+      }
+    </Results>
+  }, [paginationView, data.result, renderPaginationWithPageData, loadMoreData]);
 
-  const onSubmit = useRef(() => {
-    if (!formRef.current) return; 
-
-    if (formRef.current.publicationDateFrom.value)
-      formRef.current.publicationDateFrom.value = moment(formRef.current.publicationDateFrom.value).utc().format();
-
-    if (formRef.current.publicationDateTo.value)
-      formRef.current.publicationDateTo.value = moment(formRef.current.publicationDateTo.value).utc().format();
-  }).current;
+  const resultNode = useMemo(() => {
+    if (data.result === null) {
+      return renderLoading();
+    } else if (!data.result.length) {
+      return renderEmpty()
+    }
+    return renderResult();
+  }, [ renderLoading, renderResult, renderEmpty, data.result])
 
   return (
     <div className={styles.container}>
-      <Form initSearchStr={initSearchStr} initSource={initSource} onSubmit={onSubmit} ref={formRef}>
-        <Settings onChange={onSettingsChange} initSort={initSort} initFilter={initFilter} />
+      <Form
+        load={loadData}
+        renderSourceSelect={renderSourceSelect}
+        renderQueryInput={renderQueryInput}
+      >
+        <Settings
+          renderSortSwitch={renderSortSwitch}
+          renderDateRange={renderDateRange}
+        />
       </Form>
-      <Results comments={data.result} loadMoreActive={data.loadMoreActive} loadMore={onSettingsChange} />
-      {renderAlert()}
+      {resultNode}
+      <CirteriaUpdateAlert watch={data.result} />
     </div>
   );
 };

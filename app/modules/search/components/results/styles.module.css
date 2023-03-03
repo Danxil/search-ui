@@ -1,0 +1,28 @@
+.container {
+  margin-top: 80px;
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    margin-top: 50px;
+  }
+}
+
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .title {
+    font-size: 20px;
+  }
+}
+
+.list {
+  margin-top: 50px;
+}

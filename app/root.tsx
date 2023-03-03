@@ -1,5 +1,5 @@
-import { LiveReload, Outlet, Links, Scripts } from '@remix-run/react';
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import { LiveReload, Outlet, Links, Scripts, Meta } from '@remix-run/react';
+import type { LinksFunction } from '@remix-run/node';
 import { cssBundleHref } from '@remix-run/css-bundle';
 import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -26,9 +26,8 @@ export function Document({ children }: { children: React.ReactNode }) {
     <React.Fragment>
       <html lang="en">
         <head>
-          <meta charSet="utf-8" />
-          <title>Comments searcher</title>
           <Links />
+          <Meta />
         </head>
         <body>
           {children}
