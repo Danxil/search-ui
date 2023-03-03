@@ -1,8 +1,8 @@
 name: Search UI Test
 
 on:
-  push:
-    branches: ['main']
+  pull_request:
+    branches: ['release']
 
 env:
   REGISTRY: ghcr.io
