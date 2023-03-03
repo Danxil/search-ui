@@ -45,5 +45,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}v${{ steps.package-version.outputs.current-version }}
+          tags: ${{ steps.meta.outputs.tags }}_v${{ steps.package-version.outputs.current-version }}
           labels: ${{ steps.meta.outputs.labels }}
