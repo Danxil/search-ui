@@ -1,4 +1,4 @@
-name: Search UI Package
+name: Search UI Push
 
 on:
   push:
@@ -9,18 +9,6 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 19
-
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
-
   push:
     runs-on: ubuntu-latest
     permissions:
@@ -50,7 +38,7 @@ jobs:
 
       - name: get-npm-version
         id: package-version
-        uses: martinbeentjes/npm-get-version-action@v1
+        uses: martinbeentjes/npm-get-version-action@main
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
