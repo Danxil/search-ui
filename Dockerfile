@@ -5,7 +5,12 @@ COPY package*.json ./
 
 RUN npm ci
 
+COPY . .
+
 RUN npm run build
+
+COPY ./build ./
+COPY ./public/build ./public
 
 RUN rm -rf ./node_modules
 
@@ -13,7 +18,7 @@ ENV NODE_ENV production
 
 RUN npm ci --only=production && npm cache clean --force
 
-COPY . .
+COPY ./node_modules ./
 
 EXPOSE 1000
 
