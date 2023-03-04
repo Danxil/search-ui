@@ -18,6 +18,8 @@ ENV NODE_ENV production
 
 RUN npm ci --only=production && npm cache clean --force
 
+COPY ./node_modules ./
+
 EXPOSE 1000
 
 ADD start.sh /
