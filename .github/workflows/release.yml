@@ -1,4 +1,4 @@
-name: Search UI Push
+name: Push image to the registry
 
 on:
   push:
