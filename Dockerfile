@@ -9,16 +9,13 @@ COPY . .
 
 RUN npm run build
 
-COPY ./build ./
-COPY ./public/build ./public
-
 RUN rm -rf ./node_modules
 
 ENV NODE_ENV production
 
 RUN npm ci --only=production && npm cache clean --force
 
-COPY ./node_modules ./
+COPY . .
 
 EXPOSE 1000
 
