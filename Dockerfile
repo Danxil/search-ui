@@ -6,4 +6,8 @@ RUN npm ci
 COPY . .
 
 EXPOSE 1000
-CMD [ "npm", "start" ]
+
+ADD start.sh /
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
