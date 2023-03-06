@@ -1,1 +1,13 @@
-npm-debug.log
+*
+
+!/package*.json
+!/app/**
+!/public/**
+
+/public/build
+
+!/remix.config.js
+!/remix.env.d.ts
+!/server.js
+!/tsconfig.json
+
