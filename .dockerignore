@@ -1,13 +1,13 @@
 *
 
-!/package*.json
-!/app/**
-!/public/**
+!package*.json
+!app/**
+!public/**
 
-/public/build
+public/build
 
-!/remix.config.js
-!/remix.env.d.ts
-!/server.js
-!/tsconfig.json
+!remix.config.js
+!remix.env.d.ts
+!server.js
+!tsconfig.json
 
