@@ -18,7 +18,6 @@ export const meta: MetaFunction = () => ({
 });
 
 export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
-  console.log('====request====', request);
   const url = new URL(request.url);
   const q = url.searchParams.get('q') || '';
   const page = url.searchParams.get('page') || '';
