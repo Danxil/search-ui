@@ -10,6 +10,13 @@ export type CommentType = {
   publicationDate: string;
 };
 
+const DATE_FORMAT = 'MM/DD/YYYY HH:mm';
+
+const isBrowser = !!(
+  (typeof window !== 'undefined' &&
+  window.document && window.document.createElement)
+);
+
 const Comment = ({ text, articleLink, articleTitle, publicationDate }: CommentType) => {
   return (
     <div className={styles.row} key={`${text}${articleLink}`}>
@@ -25,7 +32,11 @@ const Comment = ({ text, articleLink, articleTitle, publicationDate }: CommentTy
             ]
           </div>
           <div className={styles.date}>
-            {moment(publicationDate).format('MM/DD/YYYY HH:mm')}
+            {
+              // isBrowser ?
+              //   moment(publicationDate).format(DATE_FORMAT) :
+              moment(publicationDate).utc().format(DATE_FORMAT)
+            }
           </div>
         </div>
         <div className={styles.comment}>

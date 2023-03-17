@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef } from 'react';
+import { useSearchParams } from '@remix-run/react';
 
 import Results from './components/results';
 import Settings from './components/settings';
@@ -14,9 +15,6 @@ import styles from './styles.module.css';
 // Import from resultRow does't work
 import './components/resultRow/styles.module.css'
 import useModelControls from './hooks/useModelControls';
-
-import { useSearchParams } from '@remix-run/react';
-
 import useQuerySyncToModel from './hooks/useQuerySyncToModel';
 import useFormChangeFlow from './hooks/useLoadFlows';
 
