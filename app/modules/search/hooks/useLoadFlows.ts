@@ -11,33 +11,32 @@ export default (
   const setSortAndLoad = useCallback<typeof setSort>((sort) => {
     setSort(sort);
     setPage(0);
-      
     load({ ...model, sort });
-  }, [model]);
+  }, [...Object.values(model)]);
     
   const setPageAndLoad = useCallback<typeof setPage>((page) => {
     setPage(page);
     
     load({ ...model, page });
-  }, [model]);
+  }, [...Object.values(model)]);
     
-  const dateRangeAndLoad = useCallback<typeof setDateRange>((dateRange) => {
+  const setDateRangeAndLoad = useCallback<typeof setDateRange>((dateRange) => {
     setDateRange(dateRange);
     setPage(0);
     
     load({ ...model, dateRange, page: 0 });
-  }, [model, setPage]);
+  }, [...Object.values(model), setPage]);
 
   const loadMoreData = useCallback(() => {
     loadWithoutNavigation(model);
 
     setPage(model.page + 1);
-  }, [model, load, setPage]);
+  }, [...Object.values(model), load, setPage]);
 
   return {
     setSortAndLoad,
     setPageAndLoad,
-    dateRangeAndLoad,
+    setDateRangeAndLoad,
     loadMoreData
   }
 }

@@ -108,7 +108,7 @@ export default (
 
       setVirtualData([...(prevData), ...(data?.result || []) ]);
     }, [data.result]);
-    
+
     return {
       load: loadAndResetList,
       loadWithoutNavigation,

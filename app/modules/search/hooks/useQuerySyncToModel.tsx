@@ -19,17 +19,29 @@ export default ({
   setSource,
   setPage,
   setDateRange,
-  load,
-}: { query: SearchModel, current: SearchModel } & SearchModelSetters & { load: (mode: SearchModel) => void }) => {
+}: { query: SearchModel, current: SearchModel } & SearchModelSetters) => {
+  useEffect(() => {
+    if (query.sort !== current.sort) setSort(query.sort);
+  }, [query.sort]);
+
+  useEffect(() => {
+    if (query.q !== current.q) setQ(query.q);
+  }, [query.q]);
+
+  useEffect(() => {
+    if (query.source !== current.source) setSource(query.source);
+  }, [query.source]);
+  
+  useEffect(() => {
+    if (query.page !== current.page) setPage(query.page);
+  }, [query.page]);
+
   useEffect(() => {
     const dateRangeQueryString = dateRangeToString(query.dateRange);
     const dateRangeCurrentString = dateRangeToString(current.dateRange);
 
-    if (query.sort !== current.sort) setSort(query.sort);
-    if (query.q !== current.q) setQ(query.q);
-    if (query.source !== current.source) setSource(query.source);
-    if (query.page !== current.page) setPage(query.page);
-    if (dateRangeQueryString !== dateRangeCurrentString)
+    if (dateRangeQueryString !== dateRangeCurrentString) {
       setDateRange(query.dateRange);
-  }, [...Object.values(query)]);
+    }
+  }, [query.dateRange]);
 }

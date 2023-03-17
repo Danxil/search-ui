@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -17,7 +17,14 @@ const isBrowser = !!(
   window.document && window.document.createElement)
 );
 
+let rendered = false;
+
 const Comment = ({ text, articleLink, articleTitle, publicationDate }: CommentType) => {
+
+  useEffect(() => {
+    rendered = true;
+  }, []);
+  
   return (
     <div className={styles.row} key={`${text}${articleLink}`}>
       <div className={styles.container}>
@@ -33,9 +40,11 @@ const Comment = ({ text, articleLink, articleTitle, publicationDate }: CommentTy
           </div>
           <div className={styles.date}>
             {
-              // isBrowser ?
-              //   moment(publicationDate).format(DATE_FORMAT) :
-              moment(publicationDate).utc().format(DATE_FORMAT)
+              // Convert date to the local time only after 
+              // the first render - to avoid errors related to the different DOM tree during the hydration process)
+              isBrowser && rendered ?
+                moment(publicationDate).format(DATE_FORMAT) :
+                moment(publicationDate).utc().format(DATE_FORMAT)
             }
           </div>
         </div>

@@ -17,22 +17,18 @@ import type { ReturnType } from './useModel';
 export default ({ model, setSort, setDateRange, setSource, setQ, setPage }: ReturnType) => {
   const { q, source, sort, dateRange, page } = model;
 
-  const changeSort = useCallback(() => setSort(!sort), [sort]); 
-  const changeSource = useRef<ComponentProps<typeof Select>['onChange']>(
-    (e) => {
-      setSource(e.target.value as SourceType)
-    }
-  ).current;
+  const changeSort = useCallback(() => setSort(!sort), [sort, setSort]); 
+  const changeSource = useCallback<Required<ComponentProps<typeof Select>>['onChange']>((e) => {
+    setSource(e.target.value as SourceType)
+  }, [setSource]);
 
-  const changeQ = useRef<ChangeEventHandler<HTMLInputElement>>(
-    (e) => {
-      setQ(e.target.value)
-    }
-  ).current; 
+  const changeQ = useCallback<ChangeEventHandler<HTMLInputElement>>((e) => {
+    setQ(e.target.value)
+  }, [setQ]); 
 
-  const changePage = useRef((pageVal: typeof page) => {
+  const changePage = useCallback((pageVal: typeof page) => {
     setPage(pageVal);
-  }).current;
+  }, [setPage]);
 
   const renderSortSwitch = useCallback(() => <Switch
     name="sort"
@@ -83,7 +79,7 @@ export default ({ model, setSort, setDateRange, setSource, setQ, setPage }: Retu
       total={total as number}
       onChange={changePage}
     />
-  ), [page]);
+  ), [page, changePage]);
 
   return {
     renderSortSwitch,
