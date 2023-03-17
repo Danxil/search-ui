@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 import './components/resultRow/styles.module.css'
 import useModelControls from './hooks/useModelControls';
 import useQuerySyncToModel from './hooks/useQuerySyncToModel';
-import useFormChangeFlow from './hooks/useLoadFlows';
+import useLoadFlows from './hooks/useLoadFlows';
 
 const renderLoading = () => <div className={styles.loading}>Wait...</div>;
 const renderEmpty = () => <div className={styles.loading}>No results. Change criteria</div>;
@@ -36,12 +36,12 @@ const Search = () => {
 
   const {
     setPageAndLoad,
-    dateRangeAndLoad,
+    setDateRangeAndLoad,
     setSortAndLoad,
     loadMoreData
-  } = useFormChangeFlow(setters, model, load, loadWithoutNavigation);
+  } = useLoadFlows(setters, model, load, loadWithoutNavigation);
 
-  useQuerySyncToModel({ query: initModel, current: model, ...setters, load: loadWithoutNavigation  });
+  useQuerySyncToModel({ query: initModel, current: model, ...setters });
 
   const {
     renderSortSwitch,
@@ -53,11 +53,11 @@ const Search = () => {
     model,
     ...setters,
     setPage: setPageAndLoad,
-    setDateRange: dateRangeAndLoad,
+    setDateRange: setDateRangeAndLoad,
     setSort: setSortAndLoad,
   });
 
-  const loadData = useCallback(() => setPageAndLoad(0), [setPageAndLoad])
+  const onSearchPress = useCallback(() => setPageAndLoad(0), [setPageAndLoad])
 
   const renderPaginationWithPageData = useCallback(() =>
     renderPagination(data.perPage || 0, data.total || 0), [
@@ -65,6 +65,7 @@ const Search = () => {
   ]);
 
   const renderResult = useCallback(() => {
+
     if (!data.result) return;
     return <Results>
       {
@@ -90,7 +91,7 @@ const Search = () => {
   return (
     <div className={styles.container}>
       <Form
-        load={loadData}
+        load={onSearchPress}
         renderSourceSelect={renderSourceSelect}
         renderQueryInput={renderQueryInput}
       >
