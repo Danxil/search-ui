@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
 
@@ -8,6 +8,7 @@ export type CommentType = {
   articleTitle: string;
   text: string;
   publicationDate: string;
+  highlight: string[]
 };
 
 const DATE_FORMAT = 'MM/DD/YYYY HH:mm';
@@ -19,7 +20,14 @@ const isBrowser = !!(
 
 let rendered = false;
 
-const Comment = ({ text, articleLink, articleTitle, publicationDate }: CommentType) => {
+// const highlightText = (text, hilight) => {
+//   const uniqueItems = onlyUnique(value, index, array) {
+//     return self.indexOf(value) === index;
+//   };
+// } 
+
+const Comment = ({ text, articleLink, articleTitle, publicationDate, highlight }: CommentType) => {
+  // const highlightText = useRef(highlight.filter()).current;
 
   useEffect(() => {
     rendered = true;

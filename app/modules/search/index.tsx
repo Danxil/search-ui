@@ -55,17 +55,16 @@ const Search = () => {
     setPage: setPageAndLoad,
     setDateRange: setDateRangeAndLoad,
     setSort: setSortAndLoad,
+
   });
 
   const onSearchPress = useCallback(() => setPageAndLoad(0), [setPageAndLoad])
 
-  const renderPaginationWithPageData = useCallback(() =>
-    renderPagination(data.perPage || 0, data.total || 0), [
-    data.perPage, data.total, renderPagination
-  ]);
+  const renderPaginationWithPageData = useCallback(() => (
+    renderPagination(data.loadMoreActive)
+  ), [data.loadMoreActive, renderPagination]);
 
   const renderResult = useCallback(() => {
-
     if (!data.result) return;
     return <Results>
       {
