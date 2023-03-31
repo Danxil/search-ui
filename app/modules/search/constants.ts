@@ -10,3 +10,5 @@ export const SOURCES = [
 ] as const;
 
 export const SORT_SWITCH_VALUE = 'asc';
+
+export const MAX_PAGE = 20;

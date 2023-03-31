@@ -14,7 +14,14 @@ import type { SourceType } from '../types';
 
 import type { ReturnType } from './useModel';
 
-export default ({ model, setSort, setDateRange, setSource, setQ, setPage }: ReturnType) => {
+export default ({
+  model,
+  setSort,
+  setDateRange,
+  setSource,
+  setQ,
+  setPage,
+}: ReturnType) => {
   const { q, source, sort, dateRange, page } = model;
 
   const changeSort = useCallback(() => setSort(!sort), [sort, setSort]); 
@@ -72,11 +79,10 @@ export default ({ model, setSort, setDateRange, setSource, setQ, setPage }: Retu
     onChange={changeQ}
   />, [q, changeQ]);
 
-  const renderPagination = useCallback((perPage: number, total: number) => (
+  const renderPagination = useCallback((loadMoreActive: boolean) => (
     <Pagination
       page={page}
-      perPage={perPage as number}
-      total={total as number}
+      loadMoreActive={loadMoreActive}
       onChange={changePage}
     />
   ), [page, changePage]);
