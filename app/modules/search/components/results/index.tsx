@@ -11,7 +11,7 @@ const Results = (
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Found comments</h3>
+      <h3 className={styles.title}>Comments</h3>
       {children}
     </div>
   );
