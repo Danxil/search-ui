@@ -17,7 +17,7 @@ const Form = ({
 }) => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Find insight</h1>
+      <h1 className={styles.title}>Find inside</h1>
       <h2 className={styles.subTitle}>Search by comments</h2>
       <div className={styles.form}>
         <div className={styles.controls}>
